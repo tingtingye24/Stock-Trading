@@ -3,5 +3,10 @@ Rails.application.routes.draw do
   # resources :user
   # resources :transactions
   resources :stocks
+  resources :users
+  resources :transactions
+
+  post "/users/login", to: "users#login"
+  post "/users/signup", to: "users#signup"
 
 end

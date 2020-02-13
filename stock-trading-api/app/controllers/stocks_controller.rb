@@ -5,8 +5,7 @@ class StocksController < ApplicationController
             publishable_token: ENV['IEX_API_PUBLISHABLE_TOKEN'],
             endpoint: 'https://sandbox.iexapis.com/v1'
         )
-
-        byebug
+        # byebug
         
     end
 
