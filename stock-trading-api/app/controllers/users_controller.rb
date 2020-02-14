@@ -6,16 +6,16 @@ class UsersController < ApplicationController
     end
 
     def login
-        user = User.find_by(username: params[:username])
+        user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
             render json: user
         else
-            render json: {error: "incorrect"}
+            render json: user.errors.full_messages
         end
     end
 
     def signup
-        user = User.new(username: params[:username], password: params[:password_digest])
+        user = User.new(name: params[:name], password: params[:password], email: params[:email])
         if user.save
             render json: user
         else
