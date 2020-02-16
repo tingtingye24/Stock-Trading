@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
             endpoint: 'https://sandbox.iexapis.com/v1'
         )
         user = User.find(params[:user])
-        price = client.price(params[:ticker])
+        price = client.price(params[:ticker]).round(2)
         if price
             # byebug
             user.update(wallet: user.wallet - (price * params[:stock_amount].to_i))

@@ -9,7 +9,7 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-``
+
 ActiveRecord::Schema.define(version: 2020_02_14_191832) do
 
   create_table "stocks", force: :cascade do |t|
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_191832) do
     t.integer "user_id"
     t.string "ticker"
     t.integer "stock_amount"
-    t.integer "price"
+    t.float "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
