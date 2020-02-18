@@ -23,4 +23,14 @@ class UsersController < ApplicationController
         end
     end
 
+
+    def profilio 
+        # byebug
+        user = User.find(params[:id])
+        transactions = user.transactions
+        
+        mergedStocks = User.profilioStock(transactions)
+        # byebug
+        render json: mergedStocks
+    end
 end

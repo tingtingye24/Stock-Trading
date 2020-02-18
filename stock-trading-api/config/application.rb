@@ -14,14 +14,15 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require 'alphavantagerb'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
+# Dotenv::Railtie.load
 
-IEX_API_PUBLISHABLE_TOKEN = ENV['IEX_API_PUBLISHABLE_TOKEN']
+# IEX_API_PUBLISHABLE_TOKEN = ENV['IEX_API_PUBLISHABLE_TOKEN']
 
 module StockTradingApi
   class Application < Rails::Application
