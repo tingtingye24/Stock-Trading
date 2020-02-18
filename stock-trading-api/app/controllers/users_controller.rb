@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         if user && user.authenticate(params[:password])
             render json: user
         else
-            render json: user.errors.full_messages
+            render json: ["Incorrect Email or Password"]
         end
     end
 
@@ -30,7 +30,11 @@ class UsersController < ApplicationController
         transactions = user.transactions
         
         mergedStocks = User.profilioStock(transactions)
-        # byebug
-        render json: mergedStocks
+        keys = mergedStocks.keys
+        if(transactions.length > 0 && mergedStocks[keys[-1]][:open_price] > 0)
+            render json: mergedStocks
+        else
+            render json: {}
+        end
     end
 end

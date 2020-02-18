@@ -1,8 +1,8 @@
 class User < ApplicationRecord
     has_secure_password
     has_many :transactions
-    validates :username, :password_digest, presence: true
-    validates :username, uniqueness: true
+    validates :name, :password_digest, :email, presence: true
+    validates :email, uniqueness: true
 
 
     def self.profilioStock(transactions)
@@ -25,14 +25,14 @@ class User < ApplicationRecord
             
             if obj.keys.include?(transaction.ticker)
                 obj[transaction.ticker][:stock_amount] = obj[transaction.ticker][:stock_amount] + transaction.stock_amount
-                obj[transaction.ticker][:total] = (obj[transaction.ticker][:total] + transaction.total).round(2)
+                obj[transaction.ticker][:total] = (obj[transaction.ticker][:total] + (current_price * transaction.stock_amount)).round(2)
                 obj[transaction.ticker][:price] = transaction.price
                 obj[transaction.ticker][:current_price] = current_price
                 if !obj[transaction.ticker][:open_price]
                     obj[transaction.ticker][:open_price] = open_price
                 end
             else
-                obj[transaction.ticker]= {stock_amount: transaction.stock_amount, total: transaction.total, open_price: open_price, current_price: current_price, price: transaction.price}
+                obj[transaction.ticker]= {stock_amount: transaction.stock_amount, total: (current_price * transaction.stock_amount).round(2) , open_price: open_price, current_price: current_price, price: transaction.price}
             end
         end
     

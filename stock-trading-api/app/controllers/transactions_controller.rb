@@ -8,28 +8,33 @@ class TransactionsController < ApplicationController
     end
 
     def create
-        # client = IEX::Api::Client.new(
-        #     publishable_token: ENV['IEX_API_PUBLISHABLE_TOKEN'],
-        #     endpoint: 'https://sandbox.iexapis.com/v1'
-        #  )
-        client = Alphavantage::Client.new key: ENV['ALPHA_API_KEY']
-        stock = client.stock symbol: params[:ticker]
-        stock_quote = stock.quote
+        client = IEX::Api::Client.new(
+            publishable_token: ENV['IEX_API_PUBLISHABLE_TOKEN'],
+            endpoint: 'https://sandbox.iexapis.com/v1'
+        )
         user = User.find(params[:user])
-        price = stock_quote.price.to_f.round(2)
-        # byebug
-        total = (price * params[:stock_amount].to_i).round(2)
-        if price > 0 && user.wallet - total > 0
-            transaction = Transaction.new(user_id: params[:user], ticker: params[:ticker], stock_amount: params[:stock_amount], price: price, total: total)
-            if transaction.save
-                user.update(wallet: user.wallet - total)
-                render json: transaction
+        begin
+            price = client.price(params[:ticker]).round(2)
+        rescue IEX::Errors::SymbolNotFoundError
+            render json: ["INVALID Symbol"]
+        else 
+            total = (price * params[:stock_amount].to_i).round(2)
+            if price 
+                    if user.wallet - total > 0
+                    transaction = Transaction.new(user_id: params[:user], ticker: params[:ticker].upcase, stock_amount: params[:stock_amount], price: price, total: total)
+                    # byebug
+                    if transaction.save
+                        user.update(wallet: user.wallet - total)
+                        render json: transaction
+                    else
+                        render json: transaction.full_message
+                    end
+                else
+                    render json: ["You don't have enough money"]
+                end
             else
-                render json: transaction.full_message
+                render json: ["Invalid"]
             end
-        else
-            render json: "Invalid"
         end
-    
     end
 end
