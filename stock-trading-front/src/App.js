@@ -8,13 +8,14 @@ import { connect } from "react-redux";
 import Profilio from "./containers/Profilio";
 import "./App.css";
 
-function App(props) {
+function App(props) { //testing out heroku
   return (
     <div className="App">
       {props.user ? <Navbar /> : null}
       <Switch>
         {props.user ? (
-            <><Route
+          <>
+            <Route
               exact
               path="/portfolio"
               render={routerProps => <Profilio />}
@@ -23,7 +24,8 @@ function App(props) {
               exact
               path="/transactions"
               render={routerProps => <Transactions />}
-            /></>
+            />
+          </>
         ) : null}
         <Route exact path="/" render={routerProps => <Login />} />} />
         <Route exact path="/signup" render={routerProps => <Signup />} />
