@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
                     render json: ["You don't have enough money"]
                 end
             else
-                render json: ["Invalid"]
+                render json: ["fetch exceeded please try again later"]
             end
         end
     end
