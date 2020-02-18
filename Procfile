@@ -1,0 +1,1 @@
+web: node stock-trading-front/app.js
