@@ -34,7 +34,7 @@ export default function TransCard(props) {
             <h3>Open Price:${open_price}</h3>{" "}
             <h3>Current Price: ${current_price}</h3>
           </div>
-        ) : <h3>{total}</h3>}
+        ) : <h3>Total: ${total}</h3>}
       </div>
       <h2>-----------------------------------------</h2>
     </div>
