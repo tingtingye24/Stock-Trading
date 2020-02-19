@@ -1,6 +1,11 @@
 class TransactionsController < ApplicationController
 
-    def show
+    def index
+        transactions = Transaction.all
+        render json: transactions
+    end
+
+    def show 
         user = User.find(params[:id])
         transactions = user.transactions
         # newTransaction = Transaction.addCurrentPrice(transactions)

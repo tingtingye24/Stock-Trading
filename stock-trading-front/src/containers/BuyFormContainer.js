@@ -5,7 +5,7 @@ import { BACKENDAPI } from "../constants";
 function BuyFormContainer(props) {
   const [ticker, setTicker] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   const convertWalletToUSD = price => {
     return price.toLocaleString("en-US", {
@@ -60,7 +60,8 @@ function BuyFormContainer(props) {
           Cash:{" "}
           {props.wallet ? convertWalletToUSD(props.wallet) : "Please Sign IN"}
         </h1>
-        <div class="errors">{errors.map(error => <h5>{error}</h5>)}</div>
+        {console.log(errors)}
+        <div class="errors">{errors ? errors.map(error => <h5>{error}</h5>): null}</div>
         <input
           type="text"
           placeholder="Ticker"

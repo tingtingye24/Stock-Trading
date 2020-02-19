@@ -1,1 +1,1 @@
-export const BACKENDAPI = "http://localhost:3000/";
+export const BACKENDAPI = "https://stock-trading-api.herokuapp.com/";
