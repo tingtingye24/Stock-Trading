@@ -42,14 +42,17 @@ function BuyFormContainer(props) {
     })
       .then(resp => resp.json())
       .then(data => {
+        setTicker("");
+        setQuantity("");
         if (data.id) {
           props.dispatch({
             type: "BUY",
-            wallet: props.wallet - (data.price * data.stock_amount)
+            wallet: props.wallet - data.price * data.stock_amount
           });
+
           fetchStocks();
         } else {
-            setErrors(data)
+          setErrors(data);
         }
       });
   };
@@ -60,8 +63,9 @@ function BuyFormContainer(props) {
           Cash:{" "}
           {props.wallet ? convertWalletToUSD(props.wallet) : "Please Sign IN"}
         </h1>
-        {console.log(errors)}
-        <div class="errors">{errors ? errors.map(error => <h5>{error}</h5>): null}</div>
+        <div class="errors">
+          {errors ? errors.map(error => <h5>{error}</h5>) : null}
+        </div>
         <input
           type="text"
           placeholder="Ticker"

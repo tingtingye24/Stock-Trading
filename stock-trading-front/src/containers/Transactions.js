@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import TransCard from "../components/TransCard";
 import { BACKENDAPI } from "../constants";

@@ -34,6 +34,8 @@ function Login(props) {
         })
         history.push("/portfolio");
       }else{
+        setEmail("")
+        setPassword("")
         setErrors(data)
       }
         

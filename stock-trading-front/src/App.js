@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import Profilio from "./containers/Profilio";
 import "./App.css";
 
-function App(props) { //testing out heroku
+function App(props) {
   return (
     <div className="App">
       {props.user ? <Navbar /> : null}

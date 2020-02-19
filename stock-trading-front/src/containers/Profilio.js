@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import BuyFormContainer from "./BuyFormContainer";
-import TransCard from "../components/TransCard";
 import MyStocks from "./MyStocks";
 
 export default function Profilio() {
