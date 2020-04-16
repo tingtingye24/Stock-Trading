@@ -10,3 +10,4 @@
 - [X] Color of stock varies depending on if open price is smaller red, open price is greater green, and if it is the same it will be black
 - [X] Users are required to sign in with their email and password. 
 - [X] Password are protected using bcrypt on ruby on rails.
+- [X] Using IEX Stock API the requests is currently limited sometimes it may not show
